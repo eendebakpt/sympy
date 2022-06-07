@@ -256,10 +256,9 @@ class FunctionClass(ManagedProperties):
         >>> len(f(1).args)
         1
         """
-        from sympy.sets.sets import FiniteSet
         # XXX it would be nice to handle this in __init__ but there are import
         # problems with trying to import FiniteSet there
-        return FiniteSet(*self._nargs) if self._nargs else S.Naturals0
+        return set(self._nargs) if self._nargs else S.Naturals0
 
     def __repr__(cls):
         return cls.__name__
