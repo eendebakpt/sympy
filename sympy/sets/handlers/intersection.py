@@ -19,7 +19,7 @@ from sympy.simplify.radsimp import numer
 
 intersection_sets = Dispatcher('intersection_sets')
 
-intersection_sets.do_order=True
+intersection_sets.do_order=False
  
 @intersection_sets.register(ConditionSet, ConditionSet)
 def _(a, b):
