@@ -19,7 +19,8 @@ from sympy.simplify.radsimp import numer
 
 intersection_sets = Dispatcher('intersection_sets')
 
-
+intersection_sets.do_order=True
+ 
 @intersection_sets.register(ConditionSet, ConditionSet)
 def _(a, b):
     return None
@@ -503,6 +504,8 @@ def _intlike_interval(a, b):
 @intersection_sets.register(Integers, Interval)
 def _(a, b):
     return _intlike_interval(a, b)
+
+intersection_sets.do_order=True
 
 @intersection_sets.register(Naturals, Interval)
 def _(a, b):
