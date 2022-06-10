@@ -108,7 +108,7 @@ class Dispatcher:
     >>> f(3.0)
     2.0
     """
-    __slots__ = '__name__', 'name', 'funcs', 'ordering', '_cache', 'doc'
+    __slots__ = '__name__', 'name', 'funcs', 'ordering', '_cache', 'doc', 'do_order'
 
     def __init__(self, name, doc=None):
         self.name = self.__name__ = name
@@ -116,6 +116,7 @@ class Dispatcher:
         self._cache = dict()
         self.ordering = []
         self.doc = doc
+        self.do_order = True
 
     def register(self, *types, **kwargs):
         """ Register dispatcher with new implementation
@@ -174,7 +175,7 @@ class Dispatcher:
 
             if not any(ann is Parameter.empty for ann in annotations):
                 return annotations
-
+        
     def add(self, signature, func, on_ambiguity=ambiguity_warn):
         """ Add new types/method pair to dispatcher
 
@@ -221,10 +222,11 @@ class Dispatcher:
 
     def reorder(self, on_ambiguity=ambiguity_warn):
         if _resolve[0]:
-            self.ordering = ordering(self.funcs)
-            amb = ambiguities(self.funcs)
-            if amb:
-                on_ambiguity(self, amb)
+            if self.do_order:
+                self.ordering = ordering(self.funcs)
+                amb = ambiguities(self.funcs)
+                if amb:
+                    on_ambiguity(self, amb)
         else:
             _unresolved_dispatchers.add(self)
 
