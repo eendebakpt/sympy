@@ -2763,9 +2763,6 @@ class AlgebraicNumber(Expr):
 
         return obj
 
-    def __hash__(self):
-        return super().__hash__()
-
     def _eval_evalf(self, prec):
         return self.as_expr()._evalf(prec)
 
@@ -3842,8 +3839,6 @@ class NumberSymbol(AtomicExpr):
             return NotImplemented
         if self is other:
             return True
-        if other.is_Number and self.is_irrational:
-            return False
 
         return False    # NumberSymbol != non-(Number|self)
 
