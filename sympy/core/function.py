@@ -466,7 +466,7 @@ class Function(Application, Expr):
             return UndefinedFunction(*args, **options)
 
         n = len(args)
-        if n not in cls.nargs:
+        if 1 and n not in cls.nargs:
             # XXX: exception message must be in exactly this format to
             # make it work with NumPy's functions like vectorize(). See,
             # for example, https://github.com/numpy/numpy/issues/1697.
