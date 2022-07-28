@@ -4,7 +4,9 @@ from sympy.core.cache import lazy_function
 
 from .pretty import pager_print, pretty, pretty_print, pprint, pprint_use_unicode, pprint_try_use_unicode
 
-from .latex import latex, print_latex, multiline_latex
+
+latex, print_latex, multiline_latex = lazy_function('sympy.printing.latex', ['latex', 'print_latex', 'multiline_latex'])
+
 
 mathml = lazy_function('sympy.printing.mathml', 'mathml')
 print_mathml = lazy_function('sympy.printing.mathml', 'print_mathml')
@@ -13,9 +15,9 @@ python = lazy_function('sympy.printing.python', 'python')
 pycode = lazy_function('sympy.printing.pycode', 'pycode')
 
 
-from .codeprinter import print_ccode, print_fcode
+print_ccode, print_fcode= lazy_function('sympy.printing.codeprinter', ['print_ccode', 'print_fcode'])
 
-from .codeprinter import ccode, fcode, cxxcode # noqa:F811
+ccode, fcode, cxxcode = lazy_function('sympy.printing.codeprinter', ['ccode', 'fcode', 'cxxcode'])
 
 
 glsl_code = lazy_function('sympy.printing.glsl', 'glsl_code')
