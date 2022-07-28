@@ -171,6 +171,9 @@ def lazy_function(module : str, name : str) -> Callable:
     The module containing the function is not imported until the function is used.
 
     """
+    if isinstance(name, list):
+        return [lazy_function(module, n) for n in name]
+
     func = None
 
     def _get_function():
