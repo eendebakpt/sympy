@@ -34,6 +34,7 @@ if [[ -n "${TEST_OPT_DEPENDENCY}" ]]; then
     python bin/test_external_imports.py
     python bin/test_submodule_imports.py
     python bin/test_executable.py
+    python bin/test_lazy_function.py
 fi
 
 # We change directories to make sure that we test the installed version of
