@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+__lazy_modules__ = ['sympy.integrals.integrals']
+
 from sympy.calculus.singularities import is_decreasing
 from sympy.calculus.util import continuous_domain
 from sympy.calculus.accumulationbounds import AccumulationBounds

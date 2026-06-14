@@ -3,6 +3,11 @@ Number theory module (primes, etc)
 """
 from __future__ import annotations
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.ntheory', exclude=(
+    'sympy.ntheory.digits', 'sympy.ntheory.continued_fraction',
+    'sympy.ntheory.ecm', 'sympy.ntheory.egyptian_fraction', 'sympy.ntheory.qs'))
+
 from .generate import nextprime, prevprime, prime, primepi, primerange, \
     randprime, Sieve, sieve, primorial, cycle_length, composite, compositepi
 from .primetest import isprime, is_gaussian_prime, is_mersenne_prime

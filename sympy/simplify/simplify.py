@@ -4,6 +4,9 @@ from typing import overload, TYPE_CHECKING
 
 from collections import defaultdict
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete', 'sympy.series')
+
 from sympy.concrete.products import Product
 from sympy.concrete.summations import Sum
 from sympy.core import (Basic, S, Add, Mul, Pow, Symbol, sympify,

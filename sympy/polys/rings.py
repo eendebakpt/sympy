@@ -50,7 +50,7 @@ from sympy.polys.polyutils import (
     _dict_reorder,
     _parallel_dict_from_expr,
 )
-from sympy.printing.defaults import DefaultPrinting
+from sympy.core._print_helpers import Printable as DefaultPrinting
 from sympy.utilities import public, subsets
 from sympy.utilities.iterables import is_sequence
 from sympy.utilities.magic import pollute

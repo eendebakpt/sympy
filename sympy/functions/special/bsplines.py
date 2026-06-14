@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+__lazy_modules__ = ['sympy.sets.sets']
+
 from itertools import pairwise
 from sympy.core import S, sympify
 from sympy.core.symbol import (Dummy, symbols)

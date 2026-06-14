@@ -1,5 +1,8 @@
 from __future__ import annotations
 from itertools import combinations_with_replacement
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete', 'sympy.series')
+
 from sympy.core import symbols, Add, Dummy
 from sympy.core.numbers import Rational
 from sympy.core.singleton import S

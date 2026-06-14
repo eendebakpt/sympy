@@ -20,11 +20,13 @@ T = TypeVar('T')
 def threaded_factory(func, use_add):
     """A factory for ``threaded`` decorators. """
     from sympy.core import sympify
-    from sympy.matrices import MatrixBase
     from sympy.utilities.iterables import iterable
 
     @wraps(func)
     def threaded_func(expr, *args, **kwargs):
+        # imported at call time so applying this decorator (e.g. while polys is
+        # importing) does not pull in sympy.matrices before it is ready
+        from sympy.matrices import MatrixBase
         if isinstance(expr, MatrixBase):
             return expr.applyfunc(lambda f: func(f, *args, **kwargs))
         elif iterable(expr):

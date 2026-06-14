@@ -1,4 +1,9 @@
 from __future__ import annotations
+
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.sets',
+                                 'sympy.logic', 'sympy.series')
+
 from sympy.core import Add, Mul, Pow, S
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr

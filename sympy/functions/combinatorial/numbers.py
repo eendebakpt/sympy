@@ -7,6 +7,13 @@ Factorials, binomial coefficients and related functions are located in
 the separate 'factorials' module.
 """
 from __future__ import annotations
+
+__lazy_modules__ = [
+    'sympy.ntheory.factor_', 'sympy.ntheory.generate',
+    'sympy.ntheory.partitions_', 'sympy.ntheory.primetest',
+    'sympy.polys.appellseqs', 'sympy.polys.polytools',
+]
+
 from math import prod
 from collections import defaultdict
 from typing import Callable

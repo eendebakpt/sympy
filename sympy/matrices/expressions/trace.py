@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+__lazy_modules__ = ['sympy.matrices.matrixbase']
+
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr, ExprBuilder
 from sympy.core.singleton import S

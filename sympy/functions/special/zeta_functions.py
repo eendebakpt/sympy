@@ -1,6 +1,8 @@
 """ Riemann zeta and related function. """
 from __future__ import annotations
 
+__lazy_modules__ = ['sympy.polys.polytools']
+
 from sympy.core.add import Add
 from sympy.core.cache import cacheit
 from sympy.core.function import ArgumentIndexError, expand_mul, DefinedFunction

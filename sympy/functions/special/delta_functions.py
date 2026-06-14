@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+__lazy_modules__ = ['sympy.polys.polyerrors']
+
 from sympy.core import S, diff
 from sympy.core.function import DefinedFunction, ArgumentIndexError
 from sympy.core.logic import fuzzy_not

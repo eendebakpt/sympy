@@ -6,7 +6,7 @@ from sympy.polys.domains.domainelement import DomainElement
 from sympy.polys.polyerrors import (CoercionFailed, NotInvertible,
         GeneratorsError, ExactQuotientFailed)
 from sympy.polys.polytools import Poly
-from sympy.printing.defaults import DefaultPrinting
+from sympy.core._print_helpers import Printable as DefaultPrinting
 
 
 class ExtensionElement(DomainElement, DefaultPrinting):

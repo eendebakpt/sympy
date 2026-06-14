@@ -10,6 +10,9 @@ extrapolation: pp. 375-377.)
 """
 from __future__ import annotations
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete')
+
 from sympy.core.numbers import Integer
 from sympy.core.singleton import S
 from sympy.functions.combinatorial.factorials import factorial

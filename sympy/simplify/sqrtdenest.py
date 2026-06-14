@@ -1,4 +1,7 @@
 from __future__ import annotations
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete', 'sympy.series')
+
 from sympy.core import Add, Expr, Mul, S, sympify
 from sympy.core.function import _mexpand, count_ops, expand_mul
 from sympy.core.sorting import default_sort_key

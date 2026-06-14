@@ -53,6 +53,19 @@ def __sympy_debug():
 SYMPY_DEBUG = __sympy_debug()  # type: bool
 
 
+__lazy_modules__ = [
+    'sympy.logic', 'sympy.assumptions', 'sympy.polys', 'sympy.functions',
+    'sympy.ntheory', 'sympy.concrete', 'sympy.discrete', 'sympy.sets',
+    'sympy.solvers', 'sympy.matrices', 'sympy.geometry', 'sympy.utilities',
+    'sympy.integrals', 'sympy.tensor', 'sympy.parsing', 'sympy.calculus',
+    'sympy.algebras', 'sympy.printing', 'sympy.plotting', 'sympy.interactive',
+    # leaf printers whose name collides with their function (imported from the
+    # leaf module below so the function, not the submodule, is bound)
+    'sympy.printing.latex', 'sympy.printing.pretty', 'sympy.printing.mathml',
+    'sympy.printing.python', 'sympy.printing.pycode', 'sympy.printing.rcode',
+    'sympy.printing.jscode', 'sympy.printing.preview',
+]
+
 from .core import (sympify, SympifyError, cacheit, Basic, Atom,
         preorder_traversal, S, Expr, AtomicExpr, UnevaluatedExpr, Symbol,
         Wild, Dummy, symbols, var, Number, Float, Rational, Integer,
@@ -241,14 +254,22 @@ from .calculus import (euler_equations, singularities, is_increasing,
 
 from .algebras import Quaternion
 
-from .printing import (pager_print, pretty, pretty_print, pprint,
-        pprint_use_unicode, pprint_try_use_unicode, latex, print_latex,
-        multiline_latex, mathml, print_mathml, python, print_python, pycode,
+from .printing import (pager_print, pretty_print, pprint,
+        pprint_use_unicode, pprint_try_use_unicode, print_latex,
+        multiline_latex, print_mathml, print_python,
         ccode, print_ccode, smtlib_code, glsl_code, print_glsl, cxxcode, fcode,
-        print_fcode, rcode, print_rcode, jscode, print_jscode, julia_code,
-        mathematica_code, octave_code, rust_code, print_gtk, preview, srepr,
+        print_fcode, print_rcode, print_jscode, julia_code,
+        mathematica_code, octave_code, rust_code, print_gtk, srepr,
         print_tree, StrPrinter, sstr, sstrrepr, TableForm, dotprint,
         maple_code, print_maple_code)
+from .printing.latex import latex
+from .printing.pretty import pretty
+from .printing.mathml import mathml
+from .printing.python import python
+from .printing.pycode import pycode
+from .printing.rcode import rcode
+from .printing.jscode import jscode
+from .printing.preview import preview
 
 test = lazy_function('sympy.testing.runtests_pytest', 'test')
 doctest = lazy_function('sympy.testing.runtests', 'doctest')

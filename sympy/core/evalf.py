@@ -1395,23 +1395,20 @@ def evalf_symbol(x: Expr, prec: int, options: OPT_DICT) -> TMP_RES:
 
 evalf_table: dict[type[Expr], Callable[[Expr, int, OPT_DICT], TMP_RES]] = {}
 
+# Handlers for types outside sympy.core, keyed by qualified name so building the
+# table needs no import (the type's module is loaded whenever an instance of it
+# is evaluated). Copied into evalf_table on first use.
+_lazy_evalf_table: dict[str, Callable[[Expr, int, OPT_DICT], TMP_RES]] = {}
+
 
 def _create_evalf_table():
-    global evalf_table
-    from sympy.concrete.products import Product
-    from sympy.concrete.summations import Sum
+    global evalf_table, _lazy_evalf_table
     from .add import Add
     from .mul import Mul
     from .numbers import Exp1, Float, Half, ImaginaryUnit, Integer, NaN, NegativeOne, One, Pi, Rational, \
         Zero, ComplexInfinity, AlgebraicNumber
     from .power import Pow
     from .symbol import Dummy, Symbol
-    from sympy.functions.elementary.complexes import Abs, im, re
-    from sympy.functions.elementary.exponential import exp, log
-    from sympy.functions.elementary.integers import ceiling, floor
-    from sympy.functions.elementary.piecewise import Piecewise
-    from sympy.functions.elementary.trigonometric import atan, cos, sin, tan
-    from sympy.integrals.integrals import Integral
     evalf_table = {
         Symbol: evalf_symbol,
         Dummy: evalf_symbol,
@@ -1428,31 +1425,28 @@ def _create_evalf_table():
         ComplexInfinity: lambda x, prec, options: S.ComplexInfinity,
         NaN: lambda x, prec, options: (fnan, None, prec, None),
 
-        exp: evalf_exp,
-
-        cos: evalf_trig,
-        sin: evalf_trig,
-        tan: evalf_trig,
-
         Add: evalf_add,
         Mul: evalf_mul,
         Pow: evalf_pow,
 
-        log: evalf_log,
-        atan: evalf_atan,
-        Abs: evalf_abs,
-
-        re: evalf_re,
-        im: evalf_im,
-        floor: evalf_floor,
-        ceiling: evalf_ceiling,
-
-        Integral: evalf_integral,
-        Sum: evalf_sum,
-        Product: evalf_prod,
-        Piecewise: evalf_piecewise,
-
         AlgebraicNumber: evalf_alg_num,
+    }
+    _lazy_evalf_table = {
+        'sympy.functions.elementary.exponential.exp': evalf_exp,
+        'sympy.functions.elementary.exponential.log': evalf_log,
+        'sympy.functions.elementary.trigonometric.cos': evalf_trig,
+        'sympy.functions.elementary.trigonometric.sin': evalf_trig,
+        'sympy.functions.elementary.trigonometric.tan': evalf_trig,
+        'sympy.functions.elementary.trigonometric.atan': evalf_atan,
+        'sympy.functions.elementary.complexes.Abs': evalf_abs,
+        'sympy.functions.elementary.complexes.re': evalf_re,
+        'sympy.functions.elementary.complexes.im': evalf_im,
+        'sympy.functions.elementary.integers.floor': evalf_floor,
+        'sympy.functions.elementary.integers.ceiling': evalf_ceiling,
+        'sympy.integrals.integrals.Integral': evalf_integral,
+        'sympy.concrete.summations.Sum': evalf_sum,
+        'sympy.concrete.products.Product': evalf_prod,
+        'sympy.functions.elementary.piecewise.Piecewise': evalf_piecewise,
     }
 
 
@@ -1487,12 +1481,21 @@ def evalf(x: Expr, prec: int, options: OPT_DICT) -> TMP_RES:
     If all values are ``None``, then that represents 0.
     Note that 0 is also represented as ``fzero = (0, 0, 0, 0)``.
     """
-    from sympy.functions.elementary.complexes import re as re_, im as im_
-    try:
-        rf = evalf_table[type(x)]
-        r = rf(x, prec, options)
-    except KeyError:
+    cls = type(x)
+    rf = evalf_table.get(cls)
+    if rf is None:
+        # non-core type: look up by qualified name, then memoize for next time
+        rf = _lazy_evalf_table.get(f'{cls.__module__}.{cls.__qualname__}')
+        if rf is not None:
+            evalf_table[cls] = rf
+    if rf is not None:
+        try:
+            r = rf(x, prec, options)
+        except KeyError:
+            rf = None
+    if rf is None:
         # Fall back to ordinary evalf if possible
+        from sympy.functions.elementary.complexes import re as re_, im as im_
         if 'subs' in options:
             x = x.subs(evalf_subs(prec, options['subs']))
         xe = x._eval_evalf(prec)

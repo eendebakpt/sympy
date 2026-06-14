@@ -30,6 +30,10 @@ lowered when the tensor is put in canonical form.
 """
 
 from __future__ import annotations
+
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.combinatorics', 'sympy.matrices')
+
 from typing import Any
 from functools import reduce
 from math import prod

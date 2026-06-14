@@ -107,6 +107,9 @@ class UnitSystem(_QuantityMapper):
 
     @staticmethod
     def get_default_unit_system():
+        if "SI" not in UnitSystem._unit_systems:
+            # importing the module registers the SI system (side effect)
+            from sympy.physics.units.systems import si  # noqa: F401
         return UnitSystem._unit_systems["SI"]
 
     @property

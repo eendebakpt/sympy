@@ -4,6 +4,10 @@ Includes functions for fast creating matrices like zero, one/eye, random
 matrix, etc.
 """
 from __future__ import annotations
+
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.matrices')
+
 from .exceptions import ShapeError, NonSquareMatrixError
 from .kind import MatrixKind
 from .dense import (
@@ -13,17 +17,15 @@ from .dense import (
     rot_ccw_axis2, rot_ccw_axis3, rot_givens,
     symarray, wronskian, zeros)
 from .dense import MutableDenseMatrix
+from .dense import MutableDenseMatrix as MutableMatrix
+from .dense import MutableDenseMatrix as Matrix
 from .matrixbase import DeferredVector, MatrixBase
 
-MutableMatrix = MutableDenseMatrix
-Matrix = MutableMatrix
-
 from .sparse import MutableSparseMatrix
+from .sparse import MutableSparseMatrix as SparseMatrix
 from .sparsetools import banded
 from .immutable import ImmutableDenseMatrix, ImmutableSparseMatrix
-
-ImmutableMatrix = ImmutableDenseMatrix
-SparseMatrix = MutableSparseMatrix
+from .immutable import ImmutableDenseMatrix as ImmutableMatrix
 
 from .expressions import (
     MatrixSlice, BlockDiagMatrix, BlockMatrix, FunctionMatrix, Identity,

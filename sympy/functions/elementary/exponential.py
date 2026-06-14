@@ -1,6 +1,12 @@
 from __future__ import annotations
 from itertools import product
 
+__lazy_modules__ = [
+    'sympy.functions.combinatorial.factorials',
+    'sympy.ntheory',
+    'sympy.ntheory.factor_',
+]
+
 from sympy.core.add import Add
 from sympy.core.cache import cacheit
 from sympy.core.function import (DefinedFunction, ArgumentIndexError, expand_log,
