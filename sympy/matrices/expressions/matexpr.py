@@ -1,6 +1,9 @@
 from __future__ import annotations
 from functools import wraps
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.matrices')
+
 from sympy.core import S, Integer, Basic, Mul, Add
 from sympy.core.assumptions import check_assumptions
 from sympy.core.decorators import call_highest_priority

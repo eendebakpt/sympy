@@ -25,7 +25,6 @@ from sympy.ntheory import divisors, isprime, nextprime
 from sympy.polys.domains import EX
 from sympy.polys.polyerrors import (PolynomialError, GeneratorsNeeded,
     DomainError, UnsolvableFactorError)
-from sympy.polys.polyquinticconst import PolyQuintic
 from sympy.polys.polytools import Poly, cancel, factor, gcd_list, discriminant
 from sympy.polys.rationaltools import together
 from sympy.polys.specialpolys import cyclotomic_poly
@@ -538,6 +537,10 @@ def roots_quintic(f):
     Calculate exact roots of a solvable irreducible quintic with rational coefficients.
     Return an empty list if the quintic is reducible or not solvable.
     """
+    # PolyQuintic is only needed for solvable quintics, so import it lazily to
+    # avoid loading sympy.polys.polyquinticconst on every ``import sympy``.
+    from sympy.polys.polyquinticconst import PolyQuintic
+
     result = []
 
     coeff_5, coeff_4, p_, q_, r_, s_ = f.all_coeffs()

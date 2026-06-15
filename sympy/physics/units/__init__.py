@@ -28,6 +28,9 @@ Useful functions:
 
 """
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.physics.units')
+
 from .dimensions import Dimension, DimensionSystem
 from .unitsystem import UnitSystem
 from .util import convert_to
@@ -42,12 +45,13 @@ from .definitions.dimension_definitions import (
     velocity, voltage, volume
 )
 
-Unit = Quantity
-
-speed = velocity
-luminosity = luminous_intensity
-magnetic_flux_density = magnetic_density
-amount = amount_of_substance
+# aliases (written as imports so they stay lazy under __lazy_modules__ rather
+# than being resolved eagerly here)
+from .quantities import Quantity as Unit
+from .definitions.dimension_definitions import velocity as speed
+from .definitions.dimension_definitions import luminous_intensity as luminosity
+from .definitions.dimension_definitions import magnetic_density as magnetic_flux_density
+from .definitions.dimension_definitions import amount_of_substance as amount
 
 from .prefixes import (
     # 10-power based:

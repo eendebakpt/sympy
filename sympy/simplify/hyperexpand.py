@@ -62,6 +62,9 @@ from itertools import product
 from functools import reduce
 from math import prod
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete', 'sympy.series')
+
 from sympy import SYMPY_DEBUG
 from sympy.core import (S, Dummy, symbols, sympify, Tuple, expand, I, pi, Mul,
     EulerGamma, oo, zoo, expand_func, Add, nan, Expr, Rational)

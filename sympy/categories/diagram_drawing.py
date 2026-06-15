@@ -2575,7 +2575,7 @@ def preview_diagram(diagram, masked=None, diagram_format="", groups=None,
 
     XypicDiagramDrawer
     """
-    from sympy.printing import preview
+    from sympy.printing.preview import preview
     latex_output = xypic_draw_diagram(diagram, masked, diagram_format,
                                       groups, **hints)
     preview(latex_output, output, viewer, euler, ("xypic",))

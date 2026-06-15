@@ -119,6 +119,9 @@ debug this function to figure out the exact problem.
 from __future__ import annotations
 from functools import reduce
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete')
+
 from sympy.core import Basic, S, Mul, PoleError
 from sympy.core.cache import cacheit
 from sympy.core.function import AppliedUndef

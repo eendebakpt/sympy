@@ -1,6 +1,9 @@
 """Calculus-related methods."""
 from __future__ import annotations
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.calculus')
+
 from .euler import euler_equations
 from .singularities import (singularities, is_increasing,
                             is_strictly_increasing, is_decreasing,

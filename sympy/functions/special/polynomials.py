@@ -7,6 +7,8 @@ combinatorial polynomials.
 """
 from __future__ import annotations
 
+__lazy_modules__ = ['sympy.polys.orthopolys']
+
 from sympy.core import Rational
 from sympy.core.function import DefinedFunction, ArgumentIndexError
 from sympy.core.singleton import S
@@ -509,7 +511,9 @@ class chebyshevt(OrthogonalPolynomial):
 
     """
 
-    _ortho_poly = staticmethod(chebyshevt_poly)
+    @staticmethod
+    def _ortho_poly(*args, **kwargs):
+        return chebyshevt_poly(*args, **kwargs)
 
     @classmethod
     def eval(cls, n, x):
@@ -627,7 +631,9 @@ class chebyshevu(OrthogonalPolynomial):
 
     """
 
-    _ortho_poly = staticmethod(chebyshevu_poly)
+    @staticmethod
+    def _ortho_poly(*args, **kwargs):
+        return chebyshevu_poly(*args, **kwargs)
 
     @classmethod
     def eval(cls, n, x):
@@ -825,7 +831,9 @@ class legendre(OrthogonalPolynomial):
 
     """
 
-    _ortho_poly = staticmethod(legendre_poly)
+    @staticmethod
+    def _ortho_poly(*args, **kwargs):
+        return legendre_poly(*args, **kwargs)
 
     @classmethod
     def eval(cls, n, x):
@@ -1058,7 +1066,9 @@ class hermite(OrthogonalPolynomial):
 
     """
 
-    _ortho_poly = staticmethod(hermite_poly)
+    @staticmethod
+    def _ortho_poly(*args, **kwargs):
+        return hermite_poly(*args, **kwargs)
 
     @classmethod
     def eval(cls, n, x):
@@ -1164,7 +1174,9 @@ class hermite_prob(OrthogonalPolynomial):
     .. [2] https://mathworld.wolfram.com/HermitePolynomial.html
     """
 
-    _ortho_poly = staticmethod(hermite_prob_poly)
+    @staticmethod
+    def _ortho_poly(*args, **kwargs):
+        return hermite_prob_poly(*args, **kwargs)
 
     @classmethod
     def eval(cls, n, x):
@@ -1265,7 +1277,9 @@ class laguerre(OrthogonalPolynomial):
 
     """
 
-    _ortho_poly = staticmethod(laguerre_poly)
+    @staticmethod
+    def _ortho_poly(*args, **kwargs):
+        return laguerre_poly(*args, **kwargs)
 
     @classmethod
     def eval(cls, n, x):

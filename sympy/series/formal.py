@@ -3,6 +3,9 @@ from __future__ import annotations
 
 from collections import defaultdict
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete')
+
 from sympy.core.numbers import (nan, oo, zoo)
 from sympy.core.add import Add
 from sympy.core.expr import Expr

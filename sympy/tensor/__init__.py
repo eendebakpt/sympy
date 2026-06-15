@@ -2,6 +2,10 @@
 
 """
 from __future__ import annotations
+
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.tensor')
+
 from .indexed import IndexedBase, Idx, Indexed
 from .index_methods import get_contraction_structure, get_indices
 from .functions import shape

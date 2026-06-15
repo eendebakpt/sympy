@@ -3,6 +3,8 @@ Physical quantities.
 """
 from __future__ import annotations
 
+__lazy_modules__ = ['sympy.physics.units.prefixes', 'sympy.physics.units.dimensions']
+
 from sympy.core.expr import AtomicExpr
 from sympy.core.symbol import Symbol
 from sympy.core.sympify import sympify

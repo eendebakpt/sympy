@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete')
 
 from sympy.core.singleton import S
 from sympy.core.symbol import Symbol
 from sympy.polys.polytools import lcm
 from sympy.utilities import public
-from sympy import Poly
+from sympy.polys.polytools import Poly
 from sympy.polys.polytools import gcdex_steps
 from typing import TYPE_CHECKING
 

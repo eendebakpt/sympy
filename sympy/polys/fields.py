@@ -25,7 +25,7 @@ from sympy.polys.polyerrors import CoercionFailed
 from sympy.polys.polyoptions import build_options
 from sympy.polys.polyutils import _parallel_dict_from_expr
 from sympy.polys.rings import PolyRing, PolyElement
-from sympy.printing.defaults import DefaultPrinting
+from sympy.core._print_helpers import Printable as DefaultPrinting
 from sympy.utilities import public
 from sympy.utilities.iterables import is_sequence
 from sympy.utilities.magic import pollute

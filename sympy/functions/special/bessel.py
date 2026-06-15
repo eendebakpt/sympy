@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+__lazy_modules__ = ['sympy.polys.orthopolys']
+
 from functools import wraps
 
 from sympy.core import S

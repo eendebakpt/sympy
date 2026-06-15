@@ -1,6 +1,10 @@
 """ A module which handles Matrix Expressions """
 from __future__ import annotations
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes(
+    'sympy.matrices', exclude=('sympy.matrices.expressions.trace',))
+
 from .slice import MatrixSlice
 from .blockmatrix import BlockMatrix, BlockDiagMatrix, block_collapse, blockcut
 from .companion import CompanionMatrix

@@ -3,6 +3,9 @@ from collections import defaultdict
 from functools import reduce
 from math import prod
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete', 'sympy.series')
+
 from sympy.core.function import expand_log, count_ops, _coeff_isneg
 from sympy.core import sympify, Basic, Dummy, S, Add, Mul, Pow, expand_mul, factor_terms
 from sympy.core.sorting import ordered, default_sort_key

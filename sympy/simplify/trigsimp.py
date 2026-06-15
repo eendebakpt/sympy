@@ -2,6 +2,9 @@ from __future__ import annotations
 from collections import defaultdict
 from functools import reduce
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.functions', 'sympy.polys', 'sympy.matrices', 'sympy.ntheory', 'sympy.sets', 'sympy.calculus', 'sympy.concrete', 'sympy.integrals', 'sympy.tensor', 'sympy.discrete', 'sympy.series')
+
 from sympy.core import (sympify, Basic, S, Expr, factor_terms,
                         Mul, Add, bottom_up)
 from sympy.core.cache import cacheit
@@ -424,9 +427,6 @@ def trigsimp_groebner(expr, hints=[], quick=False, order="grlex",
             quick=quick, domain=ZZ, polynomial=polynomial).subs(subs)
 
 
-_trigs = (TrigonometricFunction, HyperbolicFunction)
-
-
 def _trigsimp_inverse(rv):
 
     def check_args(x, y):
@@ -589,7 +589,7 @@ def exptrigsimp(expr):
         # select the better of e, and e rewritten in terms of exp or trig
         # functions
         choices = [e]
-        if e.has(*_trigs):
+        if e.has(TrigonometricFunction, HyperbolicFunction):
             op = e.rewrite(exp)
             # if e is an Add, we can try to factor it
             # helps with expressions with leading factors
@@ -729,10 +729,10 @@ def trigsimp_old(expr, *, first=True, **opts):
     """
     old = expr
     if first:
-        if not expr.has(*_trigs):
+        if not expr.has(TrigonometricFunction, HyperbolicFunction):
             return expr
 
-        trigsyms = set().union(*[t.free_symbols for t in expr.atoms(*_trigs)])
+        trigsyms = set().union(*[t.free_symbols for t in expr.atoms(TrigonometricFunction, HyperbolicFunction)])
         if len(trigsyms) > 1:
             from sympy.simplify.simplify import separatevars
 
@@ -994,7 +994,7 @@ def _match_div_rewrite(expr, i):
 def _trigsimp(expr, deep=False):
     # protect the cache from non-trig patterns; we only allow
     # trig patterns to enter the cache
-    if expr.has(*_trigs):
+    if expr.has(TrigonometricFunction, HyperbolicFunction):
         return __trigsimp(expr, deep)
     return expr
 
@@ -1111,7 +1111,7 @@ def __trigsimp(expr, deep=False):
         expr = expr.func(*[_trigsimp(a, deep) for a in expr.args])
 
     try:
-        if not expr.has(*_trigs):
+        if not expr.has(TrigonometricFunction, HyperbolicFunction):
             raise TypeError
         e = expr.atoms(exp)
         new = expr.rewrite(exp, deep=deep)

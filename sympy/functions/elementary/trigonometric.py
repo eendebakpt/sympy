@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+__lazy_modules__ = ['sympy.ntheory', 'sympy.polys.specialpolys']
+
 from sympy.core.add import Add
 from sympy.core.cache import cacheit
 from sympy.core.function import DefinedFunction, ArgumentIndexError, PoleError, expand_mul

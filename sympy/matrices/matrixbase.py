@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.printing')
+
 from typing import TYPE_CHECKING, overload
 
 from collections import defaultdict
@@ -23,7 +26,7 @@ from sympy.printing import sstr
 from sympy.functions.elementary.miscellaneous import Max, Min, sqrt
 from sympy.functions.special.tensor_functions import KroneckerDelta, LeviCivita
 from sympy.core.singleton import S
-from sympy.printing.defaults import Printable
+from sympy.core._print_helpers import Printable
 from sympy.printing.str import StrPrinter
 from sympy.functions.elementary.exponential import exp, log
 from sympy.functions.combinatorial.factorials import binomial, factorial
@@ -5761,3 +5764,7 @@ class DeferredVector(Symbol, NotIterable): # type: ignore
 
     def __repr__(self):
         return "DeferredVector('%s')" % self.name
+
+
+from sympy.core.sympify import _sympy_converter
+_sympy_converter[MatrixBase] = lambda arg: arg.as_immutable()

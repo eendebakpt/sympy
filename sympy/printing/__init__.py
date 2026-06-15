@@ -1,6 +1,9 @@
 """Printing subsystem"""
 from __future__ import annotations
 
+from sympy.core._lazy_imports import lazy_prefixes
+__lazy_modules__ = lazy_prefixes('sympy.printing')
+
 from .pretty import pager_print, pretty, pretty_print, pprint, pprint_use_unicode, pprint_try_use_unicode
 
 from .latex import latex, print_latex, multiline_latex

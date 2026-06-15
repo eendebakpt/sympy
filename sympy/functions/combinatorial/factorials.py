@@ -1,6 +1,12 @@
 from __future__ import annotations
 from functools import reduce
 
+__lazy_modules__ = [
+    'sympy.ntheory',
+    'sympy.ntheory.residue_ntheory',
+    'sympy.polys.polytools',
+]
+
 from sympy.core import S, sympify, Dummy, Mod
 from sympy.core.cache import cacheit
 from sympy.core.function import DefinedFunction, ArgumentIndexError, PoleError
