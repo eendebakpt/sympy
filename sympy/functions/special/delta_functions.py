@@ -6,7 +6,6 @@ from sympy.core.relational import Eq, Ne
 from sympy.functions.elementary.complexes import im, sign
 from sympy.functions.elementary.piecewise import Piecewise
 from sympy.polys.polyerrors import PolynomialError
-from sympy.polys.polyroots import roots
 from sympy.utilities.misc import filldedent
 
 
@@ -277,6 +276,7 @@ class DiracDelta(DefinedFunction):
         if not self.args[0].has(wrt) or (len(self.args) > 1 and self.args[1] != 0 ):
             return self
         try:
+            from sympy.polys.polyroots import roots
             argroots = roots(self.args[0], wrt)
             result = 0
             valid = True
